@@ -8,7 +8,7 @@ class Rejestracja extends StatelessWidget {
         title: Text('Rejestracja'),
       ),
       body: Center(
-        child: Text('Rejestracja Screen Content'),
+        child: Text('nie wiem czy używany będzie ale zarejestruj się'),
       ),
     );
   }
