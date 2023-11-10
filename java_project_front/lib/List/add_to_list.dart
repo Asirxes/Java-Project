@@ -52,7 +52,7 @@ class _add_listState extends State<add_list> {
             SizedBox(height: 16.0),
             Row(
               children: <Widget>[
-                Text('Waga: '),
+                Text('Waga lub pojemność: '),
                 Radio(
                   value: 'kg',
                   groupValue: selectedUnit,
@@ -87,7 +87,7 @@ class _add_listState extends State<add_list> {
             ),
             ElevatedButton(
               onPressed: () {
-                // Tutaj można dodać kod obsługujący zapis danych, np. wysyłanie ich do serwera.
+                // Tutaj dodać kod obsługujący zapis danych, np. wysyłanie ich do serwera.
                 // Możesz również dodatkowo dodać walidację wprowadzonych danych przed zapisem.
                 // Przykład zapisu danych do konsoli:
                  print('Nazwa przedmiotu: $itemName');

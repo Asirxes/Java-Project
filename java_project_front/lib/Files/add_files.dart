@@ -11,34 +11,30 @@ class add_file extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.person),
           onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => accont()),
-                );
-              },
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => accont()),
+            );
+          },
         ),
       ),
       body: Center(
-        child: 
-        Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-          
             ElevatedButton(
               onPressed: () {
                 // Navigator.push(
                 //   context,
                 //   MaterialPageRoute(builder: (context) => Rejestracja()),
-                  
+
                 // );
               },
               child: Text('dodaj przepis'),
             ),
-     
           ],
         ),
       ),
-
       bottomNavigationBar: CustomBottomNavigationBar(),
     );
   }
