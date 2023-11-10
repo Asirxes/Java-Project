@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:java_project_front/Accont/accont.dart';
 import 'package:java_project_front/AppBar/BottomNavigationBar.dart';
 
@@ -11,6 +13,33 @@ class _add_listState extends State<add_list> {
   String itemName = '';
   double itemQuantity = 0.0;
   String selectedUnit = 'kg';
+
+  Future<void> _saveData() async {
+    try {
+      // Przygotuj dane do wysłania
+      Map<String, dynamic> data = {
+        'name': itemName,
+        'quantity': itemQuantity,
+        'unit': selectedUnit,
+      };
+
+      // Wyślij dane na serwer
+      var response = await http.post(
+        Uri.parse('http://localhost:8080/produkt/add'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(data),
+      );
+
+      // Sprawdź, czy zapis się udał
+      if (response.statusCode == 200) {
+        print('Dane zostały pomyślnie zapisane na serwerze.');
+      } else {
+        print('Błąd podczas zapisywania danych na serwerze.');
+      }
+    } catch (error) {
+      print('Wystąpił błąd: $error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,15 +114,22 @@ class _add_listState extends State<add_list> {
                 Text('gr'),
               ],
             ),
+
+//          ElevatedButton(
+//               onPressed: () {
+//                 // Tutaj dodać kod obsługujący zapis danych, np. wysyłanie ich do serwera.
+//                 // Możesz również dodatkowo dodać walidację wprowadzonych danych przed zapisem.
+//                 // Przykład zapisu danych do konsoli:
+//                  print('Nazwa przedmiotu: $itemName');
+//                  print('Ilość przedmiotu: $itemQuantity');
+//                  print('Waga: $selectedUnit');
+//               },
+//               child: Text('Zapisz'),
+//             )
+
+
             ElevatedButton(
-              onPressed: () {
-                // Tutaj dodać kod obsługujący zapis danych, np. wysyłanie ich do serwera.
-                // Możesz również dodatkowo dodać walidację wprowadzonych danych przed zapisem.
-                // Przykład zapisu danych do konsoli:
-                 print('Nazwa przedmiotu: $itemName');
-                 print('Ilość przedmiotu: $itemQuantity');
-                 print('Waga: $selectedUnit');
-              },
+              onPressed: _saveData,
               child: Text('Zapisz'),
             )
           ],
