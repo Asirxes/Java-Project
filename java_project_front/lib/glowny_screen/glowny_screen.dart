@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:java_project_front/AppBar/BottomNavigationBar.dart';
+//import 'package:java_project_front/AppBar/BottomNavigationBar.dart';
 import 'package:java_project_front/List/list_screen.dart';
 import 'package:java_project_front/Rejestracja/rejestracja.dart';
 
