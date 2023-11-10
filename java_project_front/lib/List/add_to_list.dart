@@ -10,9 +10,9 @@ class add_list extends StatefulWidget {
 }
 
 class _add_listState extends State<add_list> {
-  String itemName = '';
-  double itemQuantity = 0.0;
-  String selectedUnit = 'kg';
+  String itemName = 'Kalafior';
+  double itemQuantity = 1.0;
+  int selectedUnit = 1;
 
   Future<void> _saveData() async {
     try {
@@ -25,7 +25,7 @@ class _add_listState extends State<add_list> {
 
       // Wyślij dane na serwer
       var response = await http.post(
-        Uri.parse('http://localhost:8080/produkt/add'),
+        Uri.parse('http://localhost:8080/produkt/add/1'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(data),
       );
@@ -87,7 +87,7 @@ class _add_listState extends State<add_list> {
                   groupValue: selectedUnit,
                   onChanged: (value) {
                     setState(() {
-                      selectedUnit = value!;
+                      selectedUnit = 1;
                     });
                   },
                 ),
@@ -97,7 +97,7 @@ class _add_listState extends State<add_list> {
                   groupValue: selectedUnit,
                   onChanged: (value) {
                     setState(() {
-                      selectedUnit = value!;
+                      selectedUnit = 2;
                     });
                   },
                 ),
@@ -107,7 +107,7 @@ class _add_listState extends State<add_list> {
                   groupValue: selectedUnit,
                   onChanged: (value) {
                     setState(() {
-                      selectedUnit = value!;
+                      selectedUnit = 3;
                     });
                   },
                 ),

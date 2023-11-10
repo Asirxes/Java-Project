@@ -19,7 +19,7 @@ public class produktRepository {
         String sqlGetProductId = "SELECT MAX(id) FROM produkt";
         int productId = jdbcTemplate.queryForObject(sqlGetProductId, Integer.class);
 
-        String sqlUserProdukt = "INSERT INTO uzytkownik_produkt (user_id, produkt_id) VALUES (?, ?)";
+        String sqlUserProdukt = "INSERT INTO uzytkownik_produkt (uzytkownik_id, produkt_id) VALUES (?, ?)";
         jdbcTemplate.update(sqlUserProdukt, userId, productId);
     }
 
@@ -27,7 +27,7 @@ public class produktRepository {
         String sql = "SELECT p.id, p.name, p.quantity, p.unit " +
                 "FROM produkt p " +
                 "JOIN uzytkownik_produkt up ON p.id = up.produkt_id " +
-                "WHERE up.user_id = ?";
+                "WHERE up.uzytkownik_id = ?";
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(produkt.class), userId);
     }
 
