@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RequestMapping("/uzytkownik")
+@CrossOrigin(origins = "*")
 @RestController
 public class uzytkownikController {
     @Autowired
@@ -17,6 +18,11 @@ public class uzytkownikController {
     @PostMapping("/add")
     public void addUzytkownik(@RequestBody uzytkownik uzytkownik) {
         uzytkownikRepository.addUzytkownik(uzytkownik);
+    }
+
+    @PutMapping("/changePassword/{id}")
+    public void changePassword(@PathVariable int id, @RequestBody String newPassword) {
+        uzytkownikRepository.changePassword(id, newPassword);
     }
 }
 
