@@ -19,4 +19,9 @@ public class uzytkownikRepository {
         jdbcTemplate.update(sql, uzytkownik.getEmail(), uzytkownik.getHaslo());
     }
 
+
+    public void changePassword(int id, String newPassword) {
+        String sql = "UPDATE uzytkownik SET haslo = ? WHERE id = ?";
+        jdbcTemplate.update(sql, newPassword, id);
+    }
 }
