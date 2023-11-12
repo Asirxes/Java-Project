@@ -3,12 +3,12 @@ import 'dart:convert';
 //import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class Rejestracja extends StatefulWidget {
+class Logowanie extends StatefulWidget {
   @override
-  _RejestracjaState createState() => _RejestracjaState();
+  _LogowanieState createState() => _LogowanieState();
 }
 
-class _RejestracjaState extends State<Rejestracja> {
+class _LogowanieState extends State<Logowanie> {
 //class Rejestracja extends StatelessWidget {
   String password = '';
   String email = '';
@@ -23,7 +23,7 @@ class _RejestracjaState extends State<Rejestracja> {
 
 // Wyślij dane na serwer
       var response = await http.post(
-        Uri.parse('http://localhost:8080/uzytkownik/add/1'),
+        Uri.parse('http://localhost:8080/uzytkownik/add/1'),//zmienić!
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(data),
       );
@@ -43,7 +43,7 @@ class _RejestracjaState extends State<Rejestracja> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Rejestracja'),
+        title: Text('Logowanie'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

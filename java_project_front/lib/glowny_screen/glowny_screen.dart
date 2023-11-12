@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:java_project_front/AppBar/BottomNavigationBar.dart';
+import 'package:java_project_front/Accont/logowanie.dart';
 import 'package:java_project_front/List/list_screen.dart';
 import 'package:java_project_front/Accont/rejestracja.dart';
 
@@ -27,7 +27,7 @@ class _EkranGlownyState extends State<EkranGlowny> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Rejestracja()),
+                  MaterialPageRoute(builder: (context) => Logowanie()),
                 );
               },
               child: Text('Zaloguj się'),
