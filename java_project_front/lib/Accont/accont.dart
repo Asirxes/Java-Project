@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:java_project_front/Accont/password.dart';
 import 'package:java_project_front/AppBar/BottomNavigationBar.dart';
-import 'package:java_project_front/Accont/rejestracja.dart';
+import 'package:java_project_front/glowny_screen/glowny_screen.dart';
 
 class accont extends StatelessWidget {
   @override
@@ -18,7 +18,7 @@ class accont extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Rejestracja()),
+                  MaterialPageRoute(builder: (context) => EkranGlowny()),//dodaj funkcje wylogowania oprucz przeniesienia
                 );
               },
               child: Text('Wyloguj'),
