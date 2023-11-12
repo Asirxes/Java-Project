@@ -24,4 +24,6 @@ public class uzytkownikRepository {
         String sql = "UPDATE uzytkownik SET haslo = ? WHERE id = ?";
         jdbcTemplate.update(sql, newPassword, id);
     }
+
+    //porównanie loginu i hasła do funkcji logowania
 }

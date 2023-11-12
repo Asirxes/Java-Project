@@ -24,5 +24,6 @@ public class uzytkownikController {
     public void changePassword(@PathVariable int id, @RequestBody String newPassword) {
         uzytkownikRepository.changePassword(id, newPassword);
     }
+    //porównanie loginu i hasła do funkcji logowania
 }
 
