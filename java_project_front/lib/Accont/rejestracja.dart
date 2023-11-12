@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 //import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:java_project_front/List/list_screen.dart';
 
 class Rejestracja extends StatefulWidget {
   @override
@@ -69,7 +70,13 @@ class _RejestracjaState extends State<Rejestracja> {
             ),
             SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: _saveData,
+              onPressed: () {
+                _saveData;
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => list()),
+                );
+              },
               child: Text('Potwierdź'),
             )
           ],

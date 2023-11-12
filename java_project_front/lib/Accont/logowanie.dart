@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 //import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:java_project_front/List/list_screen.dart';
 
 class Logowanie extends StatefulWidget {
   @override
@@ -23,7 +24,7 @@ class _LogowanieState extends State<Logowanie> {
 
 // Wyślij dane na serwer
       var response = await http.post(
-        Uri.parse('http://localhost:8080/uzytkownik/add/1'),//zmienić!
+        Uri.parse('http://localhost:8080/uzytkownik/add/1'), //zmienić!
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(data),
       );
@@ -68,8 +69,19 @@ class _LogowanieState extends State<Logowanie> {
               },
             ),
             SizedBox(height: 16.0),
+            // ElevatedButton(
+            //   onPressed: _saveData,
+            //   child: Text('Potwierdź'),
+            // )
+
             ElevatedButton(
-              onPressed: _saveData,
+              onPressed: () {
+                _saveData;
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => list()),
+                );
+              },
               child: Text('Potwierdź'),
             )
           ],
