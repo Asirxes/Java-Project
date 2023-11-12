@@ -22,11 +22,13 @@ class _listState extends State<list> {
 
   Future<void> _fetchProducts() async {
     try {
-      var response = await http.get(Uri.parse('http://localhost:8080/produkt/'));
+      var response =
+          await http.get(Uri.parse('http://localhost:8080/produkt/'));
 
       if (response.statusCode == 200) {
         List<dynamic> data = jsonDecode(response.body);
-        List<Produkt> products = data.map((item) => Produkt.fromJson(item)).toList();
+        List<Produkt> products =
+            data.map((item) => Produkt.fromJson(item)).toList();
 
         setState(() {
           productList = products;
@@ -59,13 +61,15 @@ class _listState extends State<list> {
         itemBuilder: (context, index) {
           return ListTile(
             title: Text(productList[index].name),
-            subtitle: Text('${productList[index].quantity} ${productList[index].unit}'),
+            subtitle: Text(
+                '${productList[index].quantity} ${productList[index].unit}'),
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => add_list()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => add_list()));
         },
         tooltip: 'Dodaj produkt',
         child: const Icon(Icons.add),

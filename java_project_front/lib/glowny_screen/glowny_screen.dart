@@ -1,9 +1,7 @@
-
 import 'package:flutter/material.dart';
 //import 'package:java_project_front/AppBar/BottomNavigationBar.dart';
 import 'package:java_project_front/List/list_screen.dart';
 import 'package:java_project_front/Accont/rejestracja.dart';
-
 
 class EkranGlowny extends StatefulWidget {
   const EkranGlowny({super.key});
@@ -13,24 +11,18 @@ class EkranGlowny extends StatefulWidget {
 }
 
 class _EkranGlownyState extends State<EkranGlowny> {
-  
-
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(   
+    return Scaffold(
       body: Center(
-        child: 
-        Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            
             Container(
               width: 200,
               height: 200,
               child: Image.asset('lib/Assets/logo.png'),
             ),
-
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -40,7 +32,6 @@ class _EkranGlownyState extends State<EkranGlowny> {
               },
               child: Text('Zaloguj się'),
             ),
-
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -49,7 +40,7 @@ class _EkranGlownyState extends State<EkranGlowny> {
                 );
               },
               child: Text('Zarejestruj się'),
-            ),  
+            ),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -58,7 +49,7 @@ class _EkranGlownyState extends State<EkranGlowny> {
                 );
               },
               child: Text('lista na teraz'),
-            ),    
+            ),
           ],
         ),
       ),

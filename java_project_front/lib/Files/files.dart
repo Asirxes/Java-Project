@@ -12,11 +12,11 @@ class files extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.person),
           onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => accont()),
-                );
-              },
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => accont()),
+            );
+          },
         ),
       ),
       body: Center(
@@ -24,13 +24,13 @@ class files extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => add_file()));
-              },
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => add_file()));
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
       bottomNavigationBar: CustomBottomNavigationBar(),
     );
-    
   }
 }

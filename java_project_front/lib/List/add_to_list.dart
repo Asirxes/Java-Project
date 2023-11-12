@@ -10,9 +10,9 @@ class add_list extends StatefulWidget {
 }
 
 class _add_listState extends State<add_list> {
-  String itemName = 'Kalafior';
-  double itemQuantity = 1.0;
-  int selectedUnit = 1;
+  String itemName = '';
+  double itemQuantity = 0.0;
+  int selectedUnit = 0;
 
   Future<void> _saveData() async {
     try {
@@ -126,7 +126,6 @@ class _add_listState extends State<add_list> {
 //               },
 //               child: Text('Zapisz'),
 //             )
-
 
             ElevatedButton(
               onPressed: _saveData,

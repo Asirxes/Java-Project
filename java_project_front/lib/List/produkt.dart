@@ -4,7 +4,11 @@ class Produkt {
   final double quantity;
   final String unit;
 
-  Produkt({required this.id, required this.name, required this.quantity, required this.unit});
+  Produkt(
+      {required this.id,
+      required this.name,
+      required this.quantity,
+      required this.unit});
 
   factory Produkt.fromJson(Map<String, dynamic> json) {
     return Produkt(

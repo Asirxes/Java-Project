@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'dart:convert';
+//import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class Rejestracja extends StatefulWidget {
   @override
@@ -11,6 +13,32 @@ class _RejestracjaState extends State<Rejestracja> {
   String password = '';
   String email = '';
 
+  Future<void> _saveData() async {
+    try {
+      // Przygotuj dane do wysłania
+      Map<String, dynamic> data = {
+        'haslo': password,
+        'email': email,
+      };
+
+// Wyślij dane na serwer
+      var response = await http.post(
+        Uri.parse('http://localhost:8080/uzytkownik/add/1'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(data),
+      );
+
+      // Sprawdź, czy zapis się udał
+      if (response.statusCode == 200) {
+        print('Dane zostały pomyślnie zapisane na serwerze.');
+      } else {
+        print('Błąd podczas zapisywania danych na serwerze.');
+      }
+    } catch (error) {
+      print('Wystąpił błąd: $error');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +47,7 @@ class _RejestracjaState extends State<Rejestracja> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-      child: Column(
+        child: Column(
           children: <Widget>[
             TextFormField(
               decoration: InputDecoration(labelText: 'Email'),
@@ -40,9 +68,13 @@ class _RejestracjaState extends State<Rejestracja> {
               },
             ),
             SizedBox(height: 16.0),
-            ],
+            ElevatedButton(
+              onPressed: _saveData,
+              child: Text('Potwierdź'),
+            )
+          ],
+        ),
       ),
-    ),
     );
   }
 }

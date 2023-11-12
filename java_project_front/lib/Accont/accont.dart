@@ -5,13 +5,12 @@ import 'package:java_project_front/Accont/rejestracja.dart';
 class accont extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-   return Scaffold( 
-  appBar: AppBar(
+    return Scaffold(
+      appBar: AppBar(
         title: Text('konto'),
-      ),  
+      ),
       body: Center(
-        child: 
-        Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
@@ -23,7 +22,6 @@ class accont extends StatelessWidget {
               },
               child: Text('Wyloguj'),
             ),
-
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -32,12 +30,10 @@ class accont extends StatelessWidget {
                 );
               },
               child: Text('Zmień hasło'),
-            ),      
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-
