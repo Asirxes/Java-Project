@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:java_project_front/glowny_screen/glowny_screen.dart';
+import 'package:java_project_front/home_screen/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
