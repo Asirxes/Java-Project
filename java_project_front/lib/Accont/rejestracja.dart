@@ -15,6 +15,7 @@ class _RejestracjaState extends State<Rejestracja> {
   String email = '';
 
   Future<void> _saveData() async {
+    print("AAAAAAAAAAAAAAA");
     try {
       // Przygotuj dane do wysłania
       Map<String, dynamic> data = {
@@ -23,8 +24,9 @@ class _RejestracjaState extends State<Rejestracja> {
       };
 
 // Wyślij dane na serwer
+      
       var response = await http.post(
-        Uri.parse('http://localhost:8080/uzytkownik/add/1'),
+        Uri.parse('http://localhost:8080/uzytkownik/add'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(data),
       );
@@ -33,6 +35,7 @@ class _RejestracjaState extends State<Rejestracja> {
       if (response.statusCode == 200) {
         print('Dane zostały pomyślnie zapisane na serwerze.');
       } else {
+        print(response.statusCode);
         print('Błąd podczas zapisywania danych na serwerze.');
       }
     } catch (error) {
@@ -71,11 +74,11 @@ class _RejestracjaState extends State<Rejestracja> {
             SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
-                _saveData;
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => list()),
-                );
+                _saveData();
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => list()),
+                // );
               },
               child: Text('Potwierdź'),
             )

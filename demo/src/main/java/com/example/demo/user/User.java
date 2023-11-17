@@ -1,4 +1,4 @@
-package com.example.demo.uzytkownik;
+package com.example.demo.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,10 +9,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class uzytkownik {
+public class User {
     private int id;
     private String email;
-    private String haslo;
-    private List<Integer> listaProduktow;
+    private String password;
+    private List<Integer> productList;
 }
-

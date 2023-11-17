@@ -1,4 +1,4 @@
-package com.example.demo.przepis;
+package com.example.demo.recipe;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,7 +29,6 @@ public class ByteArrayMultipartFile implements MultipartFile {
 
     @Override
     public String getContentType() {
-        // Określ odpowiedni Content-Type w zależności od rozszerzenia pliku, jeśli to konieczne
         return "application/octet-stream";
     }
 
@@ -54,12 +53,11 @@ public class ByteArrayMultipartFile implements MultipartFile {
     }
 
     @Override
-    public void transferTo(File dest) throws IOException, IllegalStateException {
-
+    public void transferTo(java.nio.file.Path dest) throws IOException, IllegalStateException {
+        // Implement if necessary
     }
 
     @Override
-    public void transferTo(java.nio.file.Path dest) throws IOException, IllegalStateException {
-        // Implementuj, jeśli to konieczne
+    public void transferTo(File dest) throws IOException, IllegalStateException {
     }
 }
