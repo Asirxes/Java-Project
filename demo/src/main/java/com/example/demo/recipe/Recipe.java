@@ -16,5 +16,5 @@ public class Recipe {
     private String name;
     private String text;
     private List<Product> products;
-    private List<MultipartFile> files;
+    private List<String> jsons;
 }
