@@ -1,42 +1,47 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
-//import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:java_project_front/List/list_screen.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+import '../List/list_screen.dart';
 
 class Rejestracja extends StatefulWidget {
+
   @override
   _RejestracjaState createState() => _RejestracjaState();
 }
 
 class _RejestracjaState extends State<Rejestracja> {
-//class Rejestracja extends StatelessWidget {
   String password = '';
   String email = '';
 
   Future<void> _saveData() async {
-    print("AAAAAAAAAAAAAAA");
     try {
-      // Przygotuj dane do wysłania
       Map<String, dynamic> data = {
-        'haslo': password,
+        'password': password,
         'email': email,
       };
 
-// Wyślij dane na serwer
-      
       var response = await http.post(
-        Uri.parse('http://localhost:8080/uzytkownik/add'),
+        Uri.parse('http://localhost:8080/api/users/add'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(data),
       );
 
-      // Sprawdź, czy zapis się udał
       if (response.statusCode == 200) {
         print('Dane zostały pomyślnie zapisane na serwerze.');
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => list()),
+        );
       } else {
-        print(response.statusCode);
         print('Błąd podczas zapisywania danych na serwerze.');
+        Fluttertoast.showToast(
+          msg: 'Coś poszło nie tak. Spróbuj ponownie.',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+        );
       }
     } catch (error) {
       print('Wystąpił błąd: $error');
@@ -64,21 +69,17 @@ class _RejestracjaState extends State<Rejestracja> {
             SizedBox(height: 16.0),
             TextFormField(
               decoration: InputDecoration(labelText: 'Hasło'),
-              //keyboardType: TextInputType.number,
               onChanged: (value) {
                 setState(() {
                   password = (value);
                 });
               },
+              obscureText: true, 
             ),
             SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
                 _saveData();
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => list()),
-                // );
               },
               child: Text('Potwierdź'),
             )

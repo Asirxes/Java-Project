@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:java_project_front/Accont/logowanie.dart';
-import 'package:java_project_front/List/list_screen.dart';
-import 'package:java_project_front/Accont/rejestracja.dart';
+import '../Accont/rejestracja.dart';
 
 class EkranGlowny extends StatefulWidget {
-  const EkranGlowny({super.key});
+  const EkranGlowny({Key? key}) : super(key: key);
 
   @override
   State<EkranGlowny> createState() => _EkranGlownyState();
@@ -23,6 +22,7 @@ class _EkranGlownyState extends State<EkranGlowny> {
               height: 200,
               child: Image.asset('lib/Assets/logo.png'),
             ),
+            SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -30,8 +30,13 @@ class _EkranGlownyState extends State<EkranGlowny> {
                   MaterialPageRoute(builder: (context) => Logowanie()),
                 );
               },
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(vertical: 16),
+                minimumSize: Size(300, 0),
+              ),
               child: Text('Zaloguj się'),
             ),
+            SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -39,16 +44,11 @@ class _EkranGlownyState extends State<EkranGlowny> {
                   MaterialPageRoute(builder: (context) => Rejestracja()),
                 );
               },
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.symmetric(vertical: 16),
+                minimumSize: Size(300, 0),
+              ),
               child: Text('Zarejestruj się'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => list()),
-                );
-              },
-              child: Text('lista na teraz'),
             ),
           ],
         ),

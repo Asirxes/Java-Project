@@ -10,7 +10,6 @@ class ZmianaHasla extends StatefulWidget {
 }
 
 class _ZmianaHaslaState extends State<ZmianaHasla> {
-//class ZmianaHasla extends StatelessWidget {
   String password = '';
   String email = '';
 
@@ -72,10 +71,10 @@ class _ZmianaHaslaState extends State<ZmianaHasla> {
             ElevatedButton(
               onPressed: () {
                 _saveData;
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => list()),
-                );
+                // Navigator.push(
+                //   // context,
+                //   // MaterialPageRoute(builder: (context) => list()),
+                // );
               },
               child: Text('Potwierdź'),
             )

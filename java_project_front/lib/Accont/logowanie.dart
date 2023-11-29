@@ -77,10 +77,10 @@ class _LogowanieState extends State<Logowanie> {
             ElevatedButton(
               onPressed: () {
                 _saveData;
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => list()),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => list()),
+                // );
               },
               child: Text('Potwierdź'),
             )
