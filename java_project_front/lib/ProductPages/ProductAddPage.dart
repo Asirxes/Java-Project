@@ -1,15 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:java_project_front/Accont/accont.dart';
-import 'package:java_project_front/AppBar/BottomNavigationBar.dart';
 
-class add_list extends StatefulWidget {
+class ProductAddPage extends StatefulWidget {
   @override
-  _add_listState createState() => _add_listState();
+  _ProductAddPageState createState() => _ProductAddPageState();
 }
 
-class _add_listState extends State<add_list> {
+class _ProductAddPageState extends State<ProductAddPage> {
   String itemName = '';
   double itemQuantity = 0.0;
   int selectedUnit = 0;
@@ -49,10 +47,7 @@ class _add_listState extends State<add_list> {
         leading: IconButton(
           icon: const Icon(Icons.person),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => accont()),
-            );
+
           },
         ),
       ),
@@ -134,7 +129,6 @@ class _add_listState extends State<add_list> {
           ],
         ),
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(),
     );
   }
 }

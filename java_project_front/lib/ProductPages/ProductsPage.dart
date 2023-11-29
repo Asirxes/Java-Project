@@ -1,17 +1,15 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:java_project_front/Accont/accont.dart';
-import 'package:java_project_front/AppBar/BottomNavigationBar.dart';
-import 'package:java_project_front/List/add_to_list.dart';
-import 'produkt.dart';
+import 'package:java_project_front/ProductPages/ProductAddPage.dart';
+import 'Product.dart';
 
-class list extends StatefulWidget {
+class ProductsPage extends StatefulWidget {
   @override
-  _listState createState() => _listState();
+  _ProductsPageState createState() => _ProductsPageState();
 }
 
-class _listState extends State<list> {
+class _ProductsPageState extends State<ProductsPage> {
   List<Produkt> productList = [];
 
   @override
@@ -49,10 +47,7 @@ class _listState extends State<list> {
         leading: IconButton(
           icon: const Icon(Icons.person),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => accont()),
-            );
+            
           },
         ),
       ),
@@ -69,12 +64,12 @@ class _listState extends State<list> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => add_list()));
+              context, MaterialPageRoute(builder: (context) => ProductAddPage()));
         },
         tooltip: 'Dodaj produkt',
         child: const Icon(Icons.add),
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(),
+      
     );
   }
 }

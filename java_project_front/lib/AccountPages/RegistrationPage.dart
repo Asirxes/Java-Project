@@ -2,21 +2,30 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:java_project_front/HomePage.dart';
 
-import '../List/list_screen.dart';
-
-class Rejestracja extends StatefulWidget {
-
+class RegistrationPage extends StatefulWidget {
   @override
-  _RejestracjaState createState() => _RejestracjaState();
+  _RegistrationPageState createState() => _RegistrationPageState();
 }
 
-class _RejestracjaState extends State<Rejestracja> {
+class _RegistrationPageState extends State<RegistrationPage> {
   String password = '';
+  String repeatedPassword = '';
   String email = '';
 
   Future<void> _saveData() async {
     try {
+      if (password != repeatedPassword) {
+        Fluttertoast.showToast(
+          msg: 'Hasła nie pasują do siebie.',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+        );
+        return;
+      }
+
       Map<String, dynamic> data = {
         'password': password,
         'email': email,
@@ -29,13 +38,13 @@ class _RejestracjaState extends State<Rejestracja> {
       );
 
       if (response.statusCode == 200) {
-        print('Dane zostały pomyślnie zapisane na serwerze.');
+        int userId = jsonDecode(response.body);
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => list()),
+          MaterialPageRoute(
+              builder: (context) => HomePage(isUserLoggedIn: true, userId: userId)),
         );
       } else {
-        print('Błąd podczas zapisywania danych na serwerze.');
         Fluttertoast.showToast(
           msg: 'Coś poszło nie tak. Spróbuj ponownie.',
           toastLength: Toast.LENGTH_SHORT,
@@ -71,10 +80,20 @@ class _RejestracjaState extends State<Rejestracja> {
               decoration: InputDecoration(labelText: 'Hasło'),
               onChanged: (value) {
                 setState(() {
-                  password = (value);
+                  password = value;
                 });
               },
-              obscureText: true, 
+              obscureText: true,
+            ),
+            SizedBox(height: 16.0),
+            TextFormField(
+              decoration: InputDecoration(labelText: 'Powtórz hasło'),
+              onChanged: (value) {
+                setState(() {
+                  repeatedPassword = value;
+                });
+              },
+              obscureText: true,
             ),
             SizedBox(height: 16.0),
             ElevatedButton(

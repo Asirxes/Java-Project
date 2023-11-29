@@ -13,9 +13,12 @@ public class UserRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public void addUser(User user) {
+    public int addUser(User user) {
         String sqlInsertUser = "INSERT INTO User (email, password) VALUES (?, ?)";
         jdbcTemplate.update(sqlInsertUser, user.getEmail(), user.getPassword());
+
+        String sqlSelectUserId = "SELECT id FROM User WHERE email = ? AND password = ?";
+        return jdbcTemplate.queryForObject(sqlSelectUserId, new Object[]{user.getEmail(), user.getPassword()}, Integer.class);
     }
 
     public void changePassword(int userId, String newPassword) {
@@ -23,10 +26,14 @@ public class UserRepository {
         jdbcTemplate.update(sqlUpdatePassword, newPassword, userId);
     }
 
-    public boolean login(String email, String password) {
-        String sqlLogin = "SELECT COUNT(*) FROM User WHERE email = ? AND password = ?";
-        int count = Objects.requireNonNull(jdbcTemplate.queryForObject(sqlLogin, Integer.class, email, password));
-        return count > 0;
+    public int login(String email, String password) {
+        String sqlLogin = "SELECT id FROM User WHERE email = ? AND password = ?";
+
+        try {
+            return Objects.requireNonNull(jdbcTemplate.queryForObject(sqlLogin, Integer.class, email, password));
+        } catch (NullPointerException e) {
+            return 0;
+        }
     }
 
     public void deleteUser(int userId) {

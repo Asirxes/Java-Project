@@ -11,17 +11,19 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping("/add")
-    public void addUser(@RequestBody User user) {
-        userRepository.addUser(user);
+    public int addUser(@RequestBody User user) {
+        return userRepository.addUser(user);
     }
 
     @PostMapping("/changePassword/{userId}")
-    public void changePassword(@PathVariable int userId, @RequestParam String newPassword) {
-        userRepository.changePassword(userId, newPassword);
+    public void changePassword(@PathVariable int userId, @RequestBody User user) {
+        userRepository.changePassword(userId, user.getPassword());
     }
 
     @PostMapping("/login")
-    public boolean login(@RequestParam String email, @RequestParam String password) {
+    public int login(@RequestBody User user) {
+        String email = user.getEmail();
+        String password = user.getPassword();
         return userRepository.login(email, password);
     }
 
