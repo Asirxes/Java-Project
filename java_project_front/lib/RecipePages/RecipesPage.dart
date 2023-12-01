@@ -39,10 +39,10 @@ class _RecipesPageState extends State<RecipesPage> {
           recipes = fetchedRecipes;
         });
       } else {
-        print('Błąd podczas pobierania danych z serwera.');
+        
       }
     } catch (error) {
-      print('Wystąpił błąd: $error');
+      
     }
   }
 

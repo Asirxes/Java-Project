@@ -87,4 +87,21 @@ public class RecipeRepository {
 
         return recipe;
     }
+
+    public void addProductToRecipe(int recipeId, Product product) {
+        String sqlInsertProduct = "INSERT INTO product (name, quantity, unit) VALUES (?, ?, ?)";
+        jdbcTemplate.update(sqlInsertProduct, product.getName(), product.getQuantity(), product.getUnit());
+
+        String sqlProductId = "SELECT id FROM product WHERE name = ? AND quantity = ? AND unit = ?";
+        int productId = jdbcTemplate.queryForObject(sqlProductId, Integer.class, product.getName(), product.getQuantity(), product.getUnit());
+
+        String sqlInsertRecipeProduct = "INSERT INTO recipe_product (recipe_id, product_id) VALUES (?, ?)";
+        jdbcTemplate.update(sqlInsertRecipeProduct, recipeId, productId);
+    }
+
+    public List<Product> getAllProductsForRecipe(int recipeId) {
+        List<Integer> productIds = getRecipeProductIds(recipeId);
+        return getProductsByIds(productIds);
+    }
+
 }

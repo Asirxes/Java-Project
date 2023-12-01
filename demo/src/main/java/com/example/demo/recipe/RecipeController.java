@@ -1,5 +1,6 @@
 package com.example.demo.recipe;
 
+import com.example.demo.product.Product;
 import com.example.demo.recipe.Recipe;
 import com.example.demo.recipe.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,28 @@ public class RecipeController {
             return new ResponseEntity<>("Przepis został pomyślnie zaktualizowany", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Błąd podczas aktualizacji przepisu", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/addProduct/{recipeId}")
+    public ResponseEntity<String> addProductToRecipe(
+            @PathVariable int recipeId,
+            @RequestBody Product product) {
+        try {
+            recipeRepository.addProductToRecipe(recipeId, product);
+            return new ResponseEntity<>("Produkt został pomyślnie dodany do przepisu", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Błąd podczas dodawania produktu do przepisu", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/getProducts/{recipeId}")
+    public ResponseEntity<List<Product>> getProductsForRecipe(@PathVariable int recipeId) {
+        try {
+            List<Product> products = recipeRepository.getAllProductsForRecipe(recipeId);
+            return new ResponseEntity<>(products, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

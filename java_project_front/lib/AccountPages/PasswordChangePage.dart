@@ -63,7 +63,7 @@ class _PasswordChangePageState extends State<PasswordChangePage> {
         );
       }
     } catch (error) {
-      print('Wystąpił błąd: $error');
+      
     }
   }
 

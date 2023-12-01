@@ -53,7 +53,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         );
       }
     } catch (error) {
-      print('Wystąpił błąd: $error');
+      
     }
   }
 
