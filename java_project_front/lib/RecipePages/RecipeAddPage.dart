@@ -5,8 +5,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 class RecipeAddPage extends StatefulWidget {
   final int userId;
+  final Function()? onRecipeAdded;
 
-  RecipeAddPage({required this.userId});
+  RecipeAddPage({required this.userId, this.onRecipeAdded});
 
   @override
   _RecipeAddPageState createState() => _RecipeAddPageState();
@@ -43,6 +44,8 @@ class _RecipeAddPageState extends State<RecipeAddPage> {
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
         );
+
+        widget.onRecipeAdded?.call();
 
         Navigator.pop(context); 
       } else {

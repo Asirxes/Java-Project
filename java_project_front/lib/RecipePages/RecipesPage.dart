@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'Recipe.dart';
 import 'RecipeAddPage.dart';
 
 class RecipesPage extends StatefulWidget {
@@ -14,7 +15,7 @@ class RecipesPage extends StatefulWidget {
 }
 
 class _RecipesPageState extends State<RecipesPage> {
-  List<String> recipeNames = [];
+  List<Recipe> recipes = [];
 
   @override
   void initState() {
@@ -24,22 +25,33 @@ class _RecipesPageState extends State<RecipesPage> {
 
   Future<void> _fetchRecipes() async {
     try {
-      var response =
-          await http.get(Uri.parse('http://localhost:8080/api/recipes/getAll/${widget.userId}'));
+      var response = await http.get(Uri.parse('http://localhost:8080/api/recipes/getAll/${widget.userId}'));
 
       if (response.statusCode == 200) {
         List<dynamic> data = jsonDecode(response.body);
-        List<String> names = data.map((item) => item['name'].toString()).toList();
+        List<Recipe> fetchedRecipes = data.map((item) => Recipe.fromJson(item)).toList();
 
         setState(() {
-          recipeNames = names;
+          recipes = fetchedRecipes;
         });
       } else {
-        print('Błąd podczas pobierania przepisów.');
+        print('Błąd podczas pobierania danych z serwera.');
       }
     } catch (error) {
       print('Wystąpił błąd: $error');
     }
+  }
+
+  void _openRecipeAddPage() async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => RecipeAddPage(
+          userId: widget.userId,
+          onRecipeAdded: _fetchRecipes,
+        ),
+      ),
+    );
   }
 
   @override
@@ -47,49 +59,37 @@ class _RecipesPageState extends State<RecipesPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Przepisy'),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
       ),
-      body: recipeNames.isEmpty
+      body: recipes.isEmpty
           ? Center(
               child: Text('Nie posiadasz żadnych przepisów.'),
             )
           : GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                mainAxisSpacing: 16.0,
-                crossAxisSpacing: 16.0,
+                crossAxisSpacing: 8.0,
+                mainAxisSpacing: 8.0,
               ),
-              itemCount: recipeNames.length,
+              itemCount: recipes.length,
               itemBuilder: (context, index) {
                 return ElevatedButton(
                   onPressed: () {
-                    print('Przycisk został naciśnięty!');
+                    
                   },
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.all(16),
-                    minimumSize: Size(150, 150),
                   ),
-                  child: Text(recipeNames[index]),
+                  child: Text(recipes[index].name),
                 );
               },
             ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => RecipeAddPage(userId: widget.userId),
-            ),
-          );
-        },
+        onPressed: _openRecipeAddPage,
         tooltip: 'Dodaj przepis',
         child: Icon(Icons.add),
       ),
     );
   }
 }
+
+
