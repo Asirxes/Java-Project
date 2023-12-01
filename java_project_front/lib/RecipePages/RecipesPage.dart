@@ -67,19 +67,33 @@ class _RecipesPageState extends State<RecipesPage> {
           : GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                crossAxisSpacing: 8.0,
-                mainAxisSpacing: 8.0,
+                crossAxisSpacing: 16.0, 
+                mainAxisSpacing: 16.0, 
               ),
               itemCount: recipes.length,
               itemBuilder: (context, index) {
-                return ElevatedButton(
+                return TextButton(
                   onPressed: () {
                     
                   },
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.all(16),
+                  style: ButtonStyle(
+                    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(EdgeInsets.all(16)),
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+                    shape: MaterialStateProperty.all<OutlinedBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
                   ),
-                  child: Text(recipes[index].name),
+                  child: Container(
+                    height: 100.0, 
+                    child: Center(
+                      child: Text(
+                        recipes[index].name,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
                 );
               },
             ),
@@ -91,5 +105,3 @@ class _RecipesPageState extends State<RecipesPage> {
     );
   }
 }
-
-
