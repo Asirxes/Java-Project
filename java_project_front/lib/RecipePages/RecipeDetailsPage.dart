@@ -13,12 +13,17 @@ class RecipeDetailsPage extends StatefulWidget {
 }
 
 class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
+  late TextEditingController titleController;
+  late TextEditingController textController;
+
   String title = "Tytuł przepisu";
   String text = "Tekst przepisu";
 
   @override
   void initState() {
     super.initState();
+    titleController = TextEditingController(text: title);
+    textController = TextEditingController(text: text);
     _fetchRecipeDetails();
   }
 
@@ -32,6 +37,8 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
         setState(() {
           title = data['name'];
           text = data['text'];
+          titleController.text = title;
+          textController.text = text;
         });
       } else {
         print('Błąd podczas pobierania danych z serwera.');
@@ -60,9 +67,14 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
               ),
             ),
             SizedBox(height: 8.0),
-            Text(
-              title,
+            TextField(
+              controller: titleController,
               style: TextStyle(fontSize: 16.0),
+              onChanged: (value) {
+                setState(() {
+                  title = value;
+                });
+              },
             ),
             SizedBox(height: 16.0),
             Text(
@@ -73,9 +85,35 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
               ),
             ),
             SizedBox(height: 8.0),
-            Text(
-              text,
+            TextField(
+              controller: textController,
               style: TextStyle(fontSize: 16.0),
+              onChanged: (value) {
+                setState(() {
+                  text = value;
+                });
+              },
+            ),
+            SizedBox(height: 16.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    // Usuń przepis
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.red,
+                  ),
+                  child: Text('Usuń'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    // Zapisz zmiany
+                  },
+                  child: Text('Zapisz'),
+                ),
+              ],
             ),
           ],
         ),
