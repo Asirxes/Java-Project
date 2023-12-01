@@ -51,12 +51,24 @@ public class RecipeRepository {
 
     private List<Product> getProductsByIds(List<Integer> productIds) {
         if (productIds.isEmpty()) {
-            return List.of(); // Jeśli lista jest pusta, zwróć pustą listę
+            return List.of();
         }
 
         String placeholders = String.join(",", Collections.nCopies(productIds.size(), "?"));
 
         String sql = "SELECT * FROM product WHERE id IN (" + placeholders + ")";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Product.class), productIds.toArray());
+    }
+    public Recipe getRecipeById(int recipeId) {
+        String sql = "SELECT id, name, text FROM recipe WHERE id = ?";
+        Recipe recipe = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Recipe.class), recipeId);
+
+        if (recipe != null) {
+            List<Integer> productIds = getRecipeProductIds(recipeId);
+            List<Product> products = getProductsByIds(productIds);
+            recipe.setProducts(products);
+        }
+
+        return recipe;
     }
 }
