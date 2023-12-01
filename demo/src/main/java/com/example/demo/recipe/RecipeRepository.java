@@ -104,4 +104,14 @@ public class RecipeRepository {
         return getProductsByIds(productIds);
     }
 
+    public void removeProductFromRecipe(int recipeId, int productId) {
+
+        String sqlDeleteRecipeProduct = "DELETE FROM recipe_product WHERE recipe_id = ? AND product_id = ?";
+        jdbcTemplate.update(sqlDeleteRecipeProduct, recipeId, productId);
+
+        String sqlDeleteProduct = "DELETE FROM product WHERE id = ?";
+        jdbcTemplate.update(sqlDeleteProduct, productId);
+
+    }
+
 }

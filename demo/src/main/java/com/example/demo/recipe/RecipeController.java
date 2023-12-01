@@ -69,6 +69,19 @@ public class RecipeController {
         }
     }
 
+    @DeleteMapping("/removeProduct/{recipeId}/{productId}")
+    public ResponseEntity<String> removeProductFromRecipe(
+            @PathVariable int recipeId,
+            @PathVariable int productId) {
+        try {
+            recipeRepository.removeProductFromRecipe(recipeId, productId);
+            return new ResponseEntity<>("Produkt został pomyślnie usunięty z przepisu", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Błąd podczas usuwania produktu z przepisu", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
     @GetMapping("/getProducts/{recipeId}")
     public ResponseEntity<List<Product>> getProductsForRecipe(@PathVariable int recipeId) {
         try {
