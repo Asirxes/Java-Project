@@ -4,10 +4,9 @@ import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:io';
-import 'package:flutter/material.dart';
 import 'dart:typed_data';
 import 'package:universal_html/html.dart' as html;
-import 'dart:convert' show utf8;
+
 import '../ProductPages/Product.dart';
 
 class RecipeDetailsPage extends StatefulWidget {
@@ -57,10 +56,10 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
           textController.text = text;
         });
       } else {
-        
+        // Handle error
       }
     } catch (error) {
-      
+      // Handle error
     }
   }
 
@@ -78,10 +77,10 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
               productsData.map((data) => Product.fromJson(data)).toList();
         });
       } else {
-        
+        // Handle error
       }
     } catch (error) {
-      
+      // Handle error
     }
   }
 
@@ -263,7 +262,47 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
         textColor: Colors.white,
       );
     } catch (error) {
-      
+      // Handle error
+    }
+  }
+
+  Future<void> _removeProductFromRecipe(Product product) async {
+    try {
+      var response = await http.delete(
+        Uri.parse(
+          'http://localhost:8080/api/recipes/removeProduct/${widget.recipeId}/${product.id}',
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        Fluttertoast.showToast(
+          msg: "Produkt został pomyślnie usunięty z przepisu",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+        );
+        _fetchProducts(); // Odśwież listę produktów po usunięciu
+      } else {
+        Fluttertoast.showToast(
+          msg: "Błąd podczas usuwania produktu z przepisu",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+        );
+      }
+    } catch (error) {
+      Fluttertoast.showToast(
+        msg: "Wystąpił błąd: $error",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+      );
     }
   }
 
@@ -325,8 +364,22 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
             Column(
               children: products.map((product) {
                 return ListTile(
-                  title: Text(
-                      '${product.name} - ${product.quantity} ${product.unit}'),
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('${product.name} - ${product.quantity} ${product.unit}'),
+                      ElevatedButton(
+                        onPressed: () {
+                          _removeProductFromRecipe(product);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.red,
+                          padding: EdgeInsets.symmetric(horizontal: 8.0),
+                        ),
+                        child: Text('Usuń'),
+                      ),
+                    ],
+                  ),
                   onTap: () {
                     _downloadProductJson(product);
                   },
