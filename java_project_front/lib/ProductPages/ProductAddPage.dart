@@ -1,8 +1,14 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:fluttertoast/fluttertoast.dart';
+import 'ProductsPage.dart'; // Dodane, zakładając, że to jest nazwa pliku dla listy produktów
 
 class ProductAddPage extends StatefulWidget {
+  final int userId;
+
+  ProductAddPage({required this.userId});
+
   @override
   _ProductAddPageState createState() => _ProductAddPageState();
 }
@@ -12,30 +18,49 @@ class _ProductAddPageState extends State<ProductAddPage> {
   double itemQuantity = 0.0;
   int selectedUnit = 0;
 
+  bool isSaveButtonEnabled() {
+    return itemName.isNotEmpty && itemQuantity > 0 && selectedUnit > 0;
+  }
+
   Future<void> _saveData() async {
     try {
-      // Przygotuj dane do wysłania
+      if (!isSaveButtonEnabled()) {
+        return;
+      }
+
       Map<String, dynamic> data = {
         'name': itemName,
         'quantity': itemQuantity,
         'unit': selectedUnit,
       };
 
-      // Wyślij dane na serwer
       var response = await http.post(
-        Uri.parse('http://localhost:8080/produkt/add/1'),
+        Uri.parse('http://localhost:8080/api/products/add/${widget.userId}'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(data),
       );
 
-      // Sprawdź, czy zapis się udał
       if (response.statusCode == 200) {
-        print('Dane zostały pomyślnie zapisane na serwerze.');
+        Fluttertoast.showToast(
+          msg: "Dodawanie produktu powiodło się",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+        );
+
+        Navigator.pop(context); 
       } else {
-        print('Błąd podczas zapisywania danych na serwerze.');
+        Fluttertoast.showToast(
+          msg: "Coś poszło nie tak, spróbuj ponownie",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+        );
       }
     } catch (error) {
-      print('Wystąpił błąd: $error');
+      Fluttertoast.showToast(
+        msg: "Coś poszło nie tak, spróbuj ponownie",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+      );
     }
   }
 
@@ -43,11 +68,11 @@ class _ProductAddPageState extends State<ProductAddPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Doddaj do listy"),
+        title: const Text("Dodaj do listy"),
         leading: IconButton(
-          icon: const Icon(Icons.person),
+          icon: const Icon(Icons.arrow_back), 
           onPressed: () {
-
+            Navigator.pop(context); 
           },
         ),
       ),
@@ -69,7 +94,7 @@ class _ProductAddPageState extends State<ProductAddPage> {
               keyboardType: TextInputType.number,
               onChanged: (value) {
                 setState(() {
-                  itemQuantity = double.parse(value);
+                  itemQuantity = double.tryParse(value) ?? 0.0;
                 });
               },
             ),
@@ -78,52 +103,40 @@ class _ProductAddPageState extends State<ProductAddPage> {
               children: <Widget>[
                 Text('Waga lub pojemność: '),
                 Radio(
-                  value: 'kg',
+                  value: 1,
                   groupValue: selectedUnit,
                   onChanged: (value) {
                     setState(() {
-                      selectedUnit = 1;
+                      selectedUnit = value as int;
                     });
                   },
                 ),
                 Text('kg'),
                 Radio(
-                  value: 'l',
+                  value: 2,
                   groupValue: selectedUnit,
                   onChanged: (value) {
                     setState(() {
-                      selectedUnit = 2;
+                      selectedUnit = value as int;
                     });
                   },
                 ),
                 Text('l'),
                 Radio(
-                  value: 'gr',
+                  value: 3,
                   groupValue: selectedUnit,
                   onChanged: (value) {
                     setState(() {
-                      selectedUnit = 3;
+                      selectedUnit = value as int;
                     });
                   },
                 ),
-                Text('gr'),
+                Text('g'),
               ],
             ),
-
-//          ElevatedButton(
-//               onPressed: () {
-//                 // Tutaj dodać kod obsługujący zapis danych, np. wysyłanie ich do serwera.
-//                 // Możesz również dodatkowo dodać walidację wprowadzonych danych przed zapisem.
-//                 // Przykład zapisu danych do konsoli:
-//                  print('Nazwa przedmiotu: $itemName');
-//                  print('Ilość przedmiotu: $itemQuantity');
-//                  print('Waga: $selectedUnit');
-//               },
-//               child: Text('Zapisz'),
-//             )
-
+            SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: _saveData,
+              onPressed: isSaveButtonEnabled() ? _saveData : null,
               child: Text('Zapisz'),
             )
           ],
