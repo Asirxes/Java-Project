@@ -44,6 +44,22 @@ public class RecipeRepository {
         return recipes;
     }
 
+    public void deleteRecipeById(int recipeId) {
+        String sqlDeleteUserRecipe = "DELETE FROM recipe_user WHERE recipe_id = ?";
+        jdbcTemplate.update(sqlDeleteUserRecipe, recipeId);
+
+        String sqlDeleteRecipeProduct = "DELETE FROM recipe_product WHERE recipe_id = ?";
+        jdbcTemplate.update(sqlDeleteRecipeProduct, recipeId);
+
+        String sqlDeleteRecipe = "DELETE FROM recipe WHERE id = ?";
+        jdbcTemplate.update(sqlDeleteRecipe, recipeId);
+    }
+
+    public void updateRecipeById(int recipeId, Recipe updatedRecipe) {
+        String sqlUpdateRecipe = "UPDATE recipe SET name = ?, text = ? WHERE id = ?";
+        jdbcTemplate.update(sqlUpdateRecipe, updatedRecipe.getName(), updatedRecipe.getText(), recipeId);
+    }
+
     private List<Integer> getRecipeProductIds(int recipeId) {
         String sql = "SELECT product_id FROM recipe_product WHERE recipe_id = ?";
         return jdbcTemplate.queryForList(sql, Integer.class, recipeId);

@@ -35,4 +35,24 @@ public class RecipeController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @DeleteMapping("/delete/{recipeId}")
+    public ResponseEntity<String> deleteRecipeById(@PathVariable int recipeId) {
+        try {
+            recipeRepository.deleteRecipeById(recipeId);
+            return new ResponseEntity<>("Przepis został pomyślnie usunięty", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Błąd podczas usuwania przepisu", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/update/{recipeId}")
+    public ResponseEntity<String> updateRecipeById(@PathVariable int recipeId, @RequestBody Recipe updatedRecipe) {
+        try {
+            recipeRepository.updateRecipeById(recipeId, updatedRecipe);
+            return new ResponseEntity<>("Przepis został pomyślnie zaktualizowany", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Błąd podczas aktualizacji przepisu", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

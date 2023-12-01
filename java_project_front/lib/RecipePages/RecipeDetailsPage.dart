@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class RecipeDetailsPage extends StatefulWidget {
   final int userId;
   final int recipeId;
+  final Function()? onRecipeChange;
 
-  RecipeDetailsPage({required this.userId, required this.recipeId});
+  RecipeDetailsPage(
+      {required this.userId,
+      required this.recipeId,
+      required this.onRecipeChange});
 
   @override
   _RecipeDetailsPageState createState() => _RecipeDetailsPageState();
@@ -29,8 +34,8 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
 
   Future<void> _fetchRecipeDetails() async {
     try {
-      var response = await http.get(
-          Uri.parse('http://localhost:8080/api/recipes/get/${widget.recipeId}'));
+      var response = await http.get(Uri.parse(
+          'http://localhost:8080/api/recipes/get/${widget.recipeId}'));
 
       if (response.statusCode == 200) {
         Map<String, dynamic> data = jsonDecode(response.body);
@@ -45,6 +50,89 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
       }
     } catch (error) {
       print('Wystąpił błąd: $error');
+    }
+  }
+
+  Future<void> _deleteRecipe() async {
+    try {
+      var response = await http.delete(Uri.parse(
+          'http://localhost:8080/api/recipes/delete/${widget.recipeId}'));
+
+      if (response.statusCode == 200) {
+        Fluttertoast.showToast(
+          msg: "Przepis został pomyślnie usunięty",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+        );
+
+        widget.onRecipeChange!();
+
+        Navigator.pop(context); 
+      } else {
+        Fluttertoast.showToast(
+          msg: "Błąd podczas usuwania przepisu",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+        );
+      }
+    } catch (error) {
+      Fluttertoast.showToast(
+        msg: "Wystąpił błąd: $error",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+      );
+    }
+  }
+
+  Future<void> _updateRecipe() async {
+    try {
+      var response = await http.put(Uri.parse(
+          'http://localhost:8080/api/recipes/update/${widget.recipeId}'),
+          headers: {'Content-Type': 'application/json'},
+          body: jsonEncode({
+            'name': titleController.text,
+            'text': textController.text,
+          }));
+
+      if (response.statusCode == 200) {
+        Fluttertoast.showToast(
+          msg: "Przepis został pomyślnie zaktualizowany",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+        );
+
+        widget.onRecipeChange!();
+      } else {
+        Fluttertoast.showToast(
+          msg: "Błąd podczas aktualizacji przepisu",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+        );
+      }
+    } catch (error) {
+      Fluttertoast.showToast(
+        msg: "Wystąpił błąd: $error",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+      );
     }
   }
 
@@ -100,7 +188,7 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    // Usuń przepis
+                    _deleteRecipe();
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.red,
@@ -109,7 +197,7 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    // Zapisz zmiany
+                    _updateRecipe();
                   },
                   child: Text('Zapisz'),
                 ),

@@ -65,6 +65,7 @@ class _RecipesPageState extends State<RecipesPage> {
         builder: (context) => RecipeDetailsPage(
           userId: widget.userId,
           recipeId: recipeId,
+          onRecipeChange: _fetchRecipes,
         ),
       ),
     );
