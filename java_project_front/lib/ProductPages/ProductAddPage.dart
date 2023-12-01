@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
-import 'ProductsPage.dart'; // Dodane, zakładając, że to jest nazwa pliku dla listy produktów
 
 class ProductAddPage extends StatefulWidget {
   final int userId;

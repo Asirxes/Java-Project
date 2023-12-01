@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'AccountPages/LoginPage.dart';
@@ -74,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => RecipesPage()),
+                        MaterialPageRoute(builder: (context) => RecipesPage(userId: widget.userId,)),
                       );
                     },
                     style: ElevatedButton.styleFrom(
