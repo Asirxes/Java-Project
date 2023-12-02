@@ -46,7 +46,7 @@ class _ProductAddPageState extends State<ProductAddPage> {
           gravity: ToastGravity.BOTTOM,
         );
 
-        Navigator.pop(context); 
+        Navigator.pop(context);
       } else {
         Fluttertoast.showToast(
           msg: "Coś poszło nie tak, spróbuj ponownie",
@@ -69,9 +69,9 @@ class _ProductAddPageState extends State<ProductAddPage> {
       appBar: AppBar(
         title: const Text("Dodaj do listy"),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back), 
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context); 
+            Navigator.pop(context);
           },
         ),
       ),

@@ -62,9 +62,7 @@ class _PasswordChangePageState extends State<PasswordChangePage> {
           timeInSecForIosWeb: 1,
         );
       }
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   }
 
   @override

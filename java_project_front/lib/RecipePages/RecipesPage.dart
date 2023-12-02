@@ -48,10 +48,10 @@ class _RecipesPageState extends State<RecipesPage> {
       }
     } catch (error) {
       Fluttertoast.showToast(
-          msg: 'Coś poszło nie tak. Spróbuj ponownie.',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-        );
+        msg: 'Coś poszło nie tak. Spróbuj ponownie.',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+      );
     }
   }
 

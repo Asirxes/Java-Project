@@ -47,7 +47,7 @@ class _RecipeAddPageState extends State<RecipeAddPage> {
 
         widget.onRecipeAdded?.call();
 
-        Navigator.pop(context); 
+        Navigator.pop(context);
       } else {
         Fluttertoast.showToast(
           msg: "Coś poszło nie tak, spróbuj ponownie",

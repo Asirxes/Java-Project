@@ -42,7 +42,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => HomePage(isUserLoggedIn: true, userId: userId)),
+              builder: (context) =>
+                  HomePage(isUserLoggedIn: true, userId: userId)),
         );
       } else {
         Fluttertoast.showToast(
@@ -52,9 +53,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
           timeInSecForIosWeb: 1,
         );
       }
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   }
 
   @override

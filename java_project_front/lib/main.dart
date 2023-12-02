@@ -14,17 +14,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 26, 125, 136)),
+        colorScheme:
+            ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 26, 125, 136)),
         useMaterial3: true,
       ),
-      home: const HomePage(isUserLoggedIn: false,userId: 0,),
+      home: const HomePage(
+        isUserLoggedIn: false,
+        userId: 0,
+      ),
     );
   }
 }
-
-
-
-
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -42,7 +42,8 @@ class _MyHomePageState extends State<MyHomePage> {
     var response = await http.get(Uri.parse('http://localhost:8080/hello'));
     if (response.statusCode == 200) {
       setState(() {
-        _data = jsonDecode(response.body)['message'];;
+        _data = jsonDecode(response.body)['message'];
+        ;
         _counter++;
       });
     } else {

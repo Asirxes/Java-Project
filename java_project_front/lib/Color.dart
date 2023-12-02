@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';    
+import 'package:flutter/material.dart';
 
 const MaterialColor mycolor = MaterialColor(_mycolorPrimaryValue, <int, Color>{
   50: Color(0xFFE8F3F4),

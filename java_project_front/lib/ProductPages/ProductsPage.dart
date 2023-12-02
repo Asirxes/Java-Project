@@ -26,11 +26,13 @@ class _ProductsPageState extends State<ProductsPage> {
 
   Future<void> _fetchProducts() async {
     try {
-      var response = await http.get(Uri.parse('http://localhost:8080/api/products/getAll/${widget.userId}'));
+      var response = await http.get(Uri.parse(
+          'http://localhost:8080/api/products/getAll/${widget.userId}'));
 
       if (response.statusCode == 200) {
         List<dynamic> data = jsonDecode(response.body);
-        List<Product> products = data.map((item) => Product.fromJson(item)).toList();
+        List<Product> products =
+            data.map((item) => Product.fromJson(item)).toList();
 
         setState(() {
           productList = products;
@@ -64,7 +66,7 @@ class _ProductsPageState extends State<ProductsPage> {
           gravity: ToastGravity.BOTTOM,
         );
 
-        _fetchProducts(); 
+        _fetchProducts();
       } else {
         Fluttertoast.showToast(
           msg: 'Coś poszło nie tak. Spróbuj ponownie.',
@@ -87,12 +89,13 @@ class _ProductsPageState extends State<ProductsPage> {
       appBar: AppBar(
         title: const Text("Lista zakupów"),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back), 
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => HomePage(isUserLoggedIn: true, userId: widget.userId),
+                builder: (context) =>
+                    HomePage(isUserLoggedIn: true, userId: widget.userId),
               ),
             );
           },
@@ -115,7 +118,8 @@ class _ProductsPageState extends State<ProductsPage> {
                       padding: EdgeInsets.symmetric(vertical: 16),
                       minimumSize: Size(300, 0),
                     ),
-                    child: Text('${productList[index].name} - ${productList[index].quantity} ${productList[index].unit}'),
+                    child: Text(
+                        '${productList[index].name} - ${productList[index].quantity} ${productList[index].unit}'),
                   ),
                 );
               },

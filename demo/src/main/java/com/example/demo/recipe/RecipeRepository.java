@@ -75,6 +75,7 @@ public class RecipeRepository {
         String sql = "SELECT * FROM product WHERE id IN (" + placeholders + ")";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Product.class), productIds.toArray());
     }
+
     public Recipe getRecipeById(int recipeId) {
         String sql = "SELECT id, name, text FROM recipe WHERE id = ?";
         Recipe recipe = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Recipe.class), recipeId);

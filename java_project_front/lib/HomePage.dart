@@ -72,7 +72,10 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => RecipesPage(userId: widget.userId,)),
+                        MaterialPageRoute(
+                            builder: (context) => RecipesPage(
+                                  userId: widget.userId,
+                                )),
                       );
                     },
                     style: ElevatedButton.styleFrom(
@@ -86,7 +89,10 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => ProductsPage(userId: widget.userId,)),
+                        MaterialPageRoute(
+                            builder: (context) => ProductsPage(
+                                  userId: widget.userId,
+                                )),
                       );
                     },
                     style: ElevatedButton.styleFrom(

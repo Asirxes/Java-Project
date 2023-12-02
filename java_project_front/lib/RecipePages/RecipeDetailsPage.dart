@@ -64,10 +64,10 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
       }
     } catch (error) {
       Fluttertoast.showToast(
-          msg: 'Coś poszło nie tak. Spróbuj ponownie.',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-        );
+        msg: 'Coś poszło nie tak. Spróbuj ponownie.',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+      );
     }
   }
 
@@ -85,7 +85,7 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
               productsData.map((data) => Product.fromJson(data)).toList();
         });
       } else {
-       Fluttertoast.showToast(
+        Fluttertoast.showToast(
           msg: 'Coś poszło nie tak. Spróbuj ponownie.',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
@@ -93,10 +93,10 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
       }
     } catch (error) {
       Fluttertoast.showToast(
-          msg: 'Coś poszło nie tak. Spróbuj ponownie.',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-        );
+        msg: 'Coś poszło nie tak. Spróbuj ponownie.',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+      );
     }
   }
 
@@ -279,10 +279,10 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
       );
     } catch (error) {
       Fluttertoast.showToast(
-          msg: 'Coś poszło nie tak. Spróbuj ponownie.',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-        );
+        msg: 'Coś poszło nie tak. Spróbuj ponownie.',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+      );
     }
   }
 
@@ -303,7 +303,7 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
           backgroundColor: Colors.green,
           textColor: Colors.white,
         );
-        _fetchProducts(); 
+        _fetchProducts();
       } else {
         Fluttertoast.showToast(
           msg: "Błąd podczas usuwania produktu z przepisu",
@@ -387,7 +387,8 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('${product.name} - ${product.quantity} ${product.unit}'),
+                      Text(
+                          '${product.name} - ${product.quantity} ${product.unit}'),
                       ElevatedButton(
                         onPressed: () {
                           _removeProductFromRecipe(product);
