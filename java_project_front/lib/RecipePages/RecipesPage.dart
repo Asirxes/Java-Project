@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:java_project_front/Color.dart';
 import 'dart:convert';
@@ -39,10 +40,18 @@ class _RecipesPageState extends State<RecipesPage> {
           recipes = fetchedRecipes;
         });
       } else {
-        
+        Fluttertoast.showToast(
+          msg: 'Coś poszło nie tak. Spróbuj ponownie.',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+        );
       }
     } catch (error) {
-      
+      Fluttertoast.showToast(
+          msg: 'Coś poszło nie tak. Spróbuj ponownie.',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+        );
     }
   }
 

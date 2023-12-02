@@ -56,10 +56,18 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
           textController.text = text;
         });
       } else {
-        // Handle error
+        Fluttertoast.showToast(
+          msg: 'Coś poszło nie tak. Spróbuj ponownie.',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+        );
       }
     } catch (error) {
-      // Handle error
+      Fluttertoast.showToast(
+          msg: 'Coś poszło nie tak. Spróbuj ponownie.',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+        );
     }
   }
 
@@ -77,10 +85,18 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
               productsData.map((data) => Product.fromJson(data)).toList();
         });
       } else {
-        // Handle error
+       Fluttertoast.showToast(
+          msg: 'Coś poszło nie tak. Spróbuj ponownie.',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+        );
       }
     } catch (error) {
-      // Handle error
+      Fluttertoast.showToast(
+          msg: 'Coś poszło nie tak. Spróbuj ponownie.',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+        );
     }
   }
 
@@ -262,7 +278,11 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
         textColor: Colors.white,
       );
     } catch (error) {
-      // Handle error
+      Fluttertoast.showToast(
+          msg: 'Coś poszło nie tak. Spróbuj ponownie.',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+        );
     }
   }
 
@@ -283,7 +303,7 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
           backgroundColor: Colors.green,
           textColor: Colors.white,
         );
-        _fetchProducts(); // Odśwież listę produktów po usunięciu
+        _fetchProducts(); 
       } else {
         Fluttertoast.showToast(
           msg: "Błąd podczas usuwania produktu z przepisu",
