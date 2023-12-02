@@ -3,8 +3,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:file_picker/file_picker.dart';
-import 'dart:io';
-import 'dart:typed_data';
 import 'package:universal_html/html.dart' as html;
 
 import '../ProductPages/Product.dart';
@@ -57,14 +55,14 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
         });
       } else {
         Fluttertoast.showToast(
-          msg: 'Coś poszło nie tak. Spróbuj ponownie.',
+          msg: 'Wystąpił błąd: ${response.statusCode}',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
         );
       }
     } catch (error) {
       Fluttertoast.showToast(
-        msg: 'Coś poszło nie tak. Spróbuj ponownie.',
+        msg: 'Wystąpił błąd: ${error}',
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
       );
@@ -86,14 +84,14 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
         });
       } else {
         Fluttertoast.showToast(
-          msg: 'Coś poszło nie tak. Spróbuj ponownie.',
+          msg: 'Wystąpił błąd: ${response.statusCode}',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
         );
       }
     } catch (error) {
       Fluttertoast.showToast(
-        msg: 'Coś poszło nie tak. Spróbuj ponownie.',
+        msg: 'Wystąpił błąd: ${error}',
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
       );
@@ -122,7 +120,7 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
         Navigator.pop(context);
       } else {
         Fluttertoast.showToast(
-          msg: "Błąd podczas usuwania przepisu",
+          msg: "Wystąpił błąd: ${response.statusCode}",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
@@ -168,7 +166,7 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
         _fetchProducts();
       } else {
         Fluttertoast.showToast(
-          msg: "Błąd podczas aktualizacji przepisu",
+          msg: "Wystąpił błąd: ${response.statusCode}",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
@@ -216,7 +214,7 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
         _fetchProducts();
       } catch (error) {
         Fluttertoast.showToast(
-          msg: "Błąd podczas importowania pliku JSON",
+          msg: "Wystąpił błąd: ${error}",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
@@ -279,7 +277,7 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
       );
     } catch (error) {
       Fluttertoast.showToast(
-        msg: 'Coś poszło nie tak. Spróbuj ponownie.',
+        msg: 'Wystąpił błąd: ${error}',
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
       );
@@ -306,7 +304,7 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
         _fetchProducts();
       } else {
         Fluttertoast.showToast(
-          msg: "Błąd podczas usuwania produktu z przepisu",
+          msg: "Wystąpił błąd: ${response.statusCode}",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,

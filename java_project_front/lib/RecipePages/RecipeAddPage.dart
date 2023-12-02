@@ -50,14 +50,14 @@ class _RecipeAddPageState extends State<RecipeAddPage> {
         Navigator.pop(context);
       } else {
         Fluttertoast.showToast(
-          msg: "Coś poszło nie tak, spróbuj ponownie",
+          msg: "Wystąpił błąd: ${response.statusCode}",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
         );
       }
     } catch (error) {
       Fluttertoast.showToast(
-        msg: "Coś poszło nie tak, spróbuj ponownie",
+        msg: "Wystąpił błąd: ${error}",
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
       );

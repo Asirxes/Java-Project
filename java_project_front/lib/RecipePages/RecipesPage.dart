@@ -41,14 +41,14 @@ class _RecipesPageState extends State<RecipesPage> {
         });
       } else {
         Fluttertoast.showToast(
-          msg: 'Coś poszło nie tak. Spróbuj ponownie.',
+          msg: 'Wystąpił błąd: ${response.statusCode}',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
         );
       }
     } catch (error) {
       Fluttertoast.showToast(
-        msg: 'Coś poszło nie tak. Spróbuj ponownie.',
+        msg: 'Wystąpił błąd: ${error}',
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
       );

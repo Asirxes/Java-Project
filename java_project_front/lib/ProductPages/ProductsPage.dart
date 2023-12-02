@@ -39,7 +39,7 @@ class _ProductsPageState extends State<ProductsPage> {
         });
       } else {
         Fluttertoast.showToast(
-          msg: 'Błąd podczas pobierania danych z serwera.',
+          msg: 'Wystąpił błąd: ${response.statusCode}',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
         );
@@ -69,7 +69,7 @@ class _ProductsPageState extends State<ProductsPage> {
         _fetchProducts();
       } else {
         Fluttertoast.showToast(
-          msg: 'Coś poszło nie tak. Spróbuj ponownie.',
+          msg: 'Wystąpił błąd: ${response.statusCode}',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
         );

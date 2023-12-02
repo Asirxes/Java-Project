@@ -47,13 +47,20 @@ class _RegistrationPageState extends State<RegistrationPage> {
         );
       } else {
         Fluttertoast.showToast(
-          msg: 'Coś poszło nie tak. Spróbuj ponownie.',
+          msg: 'Wystąpił błąd: ${response.statusCode}',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,
         );
       }
-    } catch (error) {}
+    } catch (error) {
+      Fluttertoast.showToast(
+          msg: 'Wystąpił błąd: ${error}',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+        );
+    }
   }
 
   @override

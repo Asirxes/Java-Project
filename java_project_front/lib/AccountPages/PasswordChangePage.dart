@@ -56,7 +56,7 @@ class _PasswordChangePageState extends State<PasswordChangePage> {
         );
       } else {
         Fluttertoast.showToast(
-          msg: 'Coś poszło nie tak. Spróbuj ponownie.',
+          msg: 'Wystąpił błąd: ${response.statusCode}',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 1,

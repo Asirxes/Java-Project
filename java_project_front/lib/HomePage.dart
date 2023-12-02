@@ -179,7 +179,7 @@ class _HomePageState extends State<HomePage> {
                                     );
                                   } else {
                                     Fluttertoast.showToast(
-                                      msg: 'Coś poszło nie tak',
+                                      msg: 'Wystąpił błąd: ${response.statusCode}',
                                       toastLength: Toast.LENGTH_SHORT,
                                       gravity: ToastGravity.BOTTOM,
                                       timeInSecForIosWeb: 1,
