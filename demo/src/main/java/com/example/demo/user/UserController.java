@@ -3,6 +3,8 @@ package com.example.demo.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -30,5 +32,10 @@ public class UserController {
     @DeleteMapping("/delete/{userId}")
     public void deleteUser(@PathVariable int userId) {
         userRepository.deleteUser(userId);
+    }
+
+    @GetMapping("/getAll")
+    public List<PostmanUser> getAllUsers() {
+        return userRepository.getAllUsers();
     }
 }

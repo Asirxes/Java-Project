@@ -13,6 +13,27 @@ public class UserRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    public List<PostmanUser> getAllUsers() {
+        String sqlSelectAllUsers = "SELECT * FROM User";
+        return jdbcTemplate.query(sqlSelectAllUsers, (resultSet, rowNum) -> {
+            PostmanUser user = new PostmanUser();
+            user.setId(resultSet.getInt("id"));
+            user.setEmail(resultSet.getString("email"));
+            return user;
+        });
+    }
+
+    public User findById(int userId) {
+        String sqlSelectUserById = "SELECT * FROM User WHERE id = ?";
+        return jdbcTemplate.queryForObject(sqlSelectUserById, new Object[]{userId}, (resultSet, rowNum) -> {
+            User user = new User();
+            user.setId(resultSet.getInt("id"));
+            user.setEmail(resultSet.getString("email"));
+            user.setPassword(resultSet.getString("password"));
+            return user;
+        });
+    }
+
     public int addUser(User user) {
         String sqlInsertUser = "INSERT INTO User (email, password) VALUES (?, ?)";
         jdbcTemplate.update(sqlInsertUser, user.getEmail(), user.getPassword());
