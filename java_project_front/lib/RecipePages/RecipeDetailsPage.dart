@@ -428,7 +428,7 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
                   onPressed: () {
                     _importJson();
                   },
-                  child: Text('Dodaj przepis JSON'),
+                  child: Text('Dodaj produktu z JSON'),
                 ),
               ],
             ),
