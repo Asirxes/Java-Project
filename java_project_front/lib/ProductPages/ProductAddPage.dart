@@ -5,8 +5,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 class ProductAddPage extends StatefulWidget {
   final int userId;
+  final Function()? onProductAdd;
 
-  ProductAddPage({required this.userId});
+  ProductAddPage({required this.userId, required this.onProductAdd});
 
   @override
   _ProductAddPageState createState() => _ProductAddPageState();
@@ -45,6 +46,8 @@ class _ProductAddPageState extends State<ProductAddPage> {
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
         );
+
+        widget.onProductAdd!();
 
         Navigator.pop(context);
       } else {

@@ -25,9 +25,9 @@ class Product {
       case 1:
         return 'kg';
       case 2:
-        return 'g';
-      case 3:
         return 'l';
+      case 3:
+        return 'g';
       default:
         return '';
     }

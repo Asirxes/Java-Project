@@ -129,7 +129,7 @@ class _ProductsPageState extends State<ProductsPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ProductAddPage(userId: widget.userId),
+              builder: (context) => ProductAddPage(userId: widget.userId, onProductAdd: _fetchProducts,),
             ),
           );
         },
